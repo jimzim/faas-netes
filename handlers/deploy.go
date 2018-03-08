@@ -232,7 +232,7 @@ func UpdateSecrets(request requests.CreateFunctionRequest, deployment *v1beta1.D
 			return fmt.Errorf("Required secret '%s' was not found in the cluster", secretName)
 		}
 
-		if deployedSecret.Type == apiv1.SecretTypeDockercfg {
+		if deployedSecret.Type == apiv1.SecretTypeDockercfg || deployedSecret.Type == apiv1.SecretTypeDockerConfigJson {
 			deployment.Spec.Template.Spec.ImagePullSecrets = append(
 				deployment.Spec.Template.Spec.ImagePullSecrets,
 				apiv1.LocalObjectReference{
